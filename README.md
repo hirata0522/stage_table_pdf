@@ -1,4 +1,30 @@
-# Python with Rye
+# About this repository
+
+## Overview
+
+pythonを用いてステージ表のpdfを作成するコード
+
+## How to Use
+
+環境構築を行ったのち`/report/make_pdf.py`内のdataを任意に書き換えたのち
+
+```sh
+rye run python python report/make_pdf.py 
+```
+
+を実行します
+
+出力は`/output`内に保存されています
+
+## 環境構築
+
+Docker環境の構築を行ったのち、このディレクトリでコンテナを起動してください
+
+Docker, pythonに関する設定は[koki-algebraさんのテンプレート](https://github.com/koki-algebra/python_docker)をそのまま流用させていただきました
+
+詳細な説明は元レポジトリより引用した**Python with Rye**のセクションを参考にしてください
+
+# Python with Rye (元レポジトリより引用)
 
 ## Overview
 
