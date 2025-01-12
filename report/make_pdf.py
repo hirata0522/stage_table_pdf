@@ -75,7 +75,7 @@ data = [["演目名", "ステージ情報1", "照明", "曲", "幕", "備考1", 
 #     ],
 # ]
 
-# PDFファイルの名前
+# PDFファイルの名前・保存先の指定
 output_filename = "./report/output/japanese_table.pdf"
 
 # フォントサイズを指定する変数
@@ -86,11 +86,12 @@ page_num_font_size = 15
 col_widths = [70, 190, 105, 105, 105]
 
 # 各行の高さを設定（必要に応じて調整してください）
-#
 row_heights = [110, 40]
 
+# dataの前処理
 data = process_data(data)
 
+# pdfの作成・保存
 create_pdf(
     output_filename,
     data,
