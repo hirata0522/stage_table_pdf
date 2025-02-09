@@ -6,7 +6,7 @@ pythonを用いてステージ表のpdfを作成するコード
 
 ## How to Use
 
-環境構築を行ったのち`/report/make_pdf.py`内のdataを任意に書き換えたのち
+`/report/make_pdf.py`内のdataを任意に書き換えたのち
 
 ```sh
 rye run python python report/make_pdf.py 
