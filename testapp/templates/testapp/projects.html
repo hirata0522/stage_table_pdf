@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <title>テーブル追加</title>
+    <style>
+        .container {
+            width: 500px;
+            margin: 100px auto;
+        }
+
+        input {
+            width: 300px;
+            font-size: 18px;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .remove {
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            background-color: tomato;
+            color: white;
+            border: none;
+            border-radius: 15px;
+        }
+
+        #addRow,
+        #getValues {
+            width: 130px;
+            height: 40px;
+            font-size: 16px;
+            background-color: lightseagreen;
+            color: white;
+            border: none;
+            margin: 20px;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        tr:hover {
+            cursor: move;
+        }
+    </style>
+</head>
+
+<div style="margin-left: 400px; margin-right: 400px; margin-top: 50px;">
+    <ul class="list-9">
+        {% for event in event_names %}
+        <li>
+            <a href="/projects/{{ event }}" class="large">{{ event }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container" style="text-align: center; margin-top: 50px;">
+    <form action="/projects" method="GET">
+        <span>
+            <input type="text" id="nameInput" name="name" style="width: 100%;"><button id="addRow">追加</button>
+        </span>
+    </form>
+</div>
+<script>
+    var event_names = "{{ event_names }}";
+    // DOM 要素を取得
+    const nameInput = document.getElementById("nameInput");
+    const addRowButton = document.getElementById("addRow");
+
+    // 変数の値をコンソールに出力
+    event_names = event_names.replace(/&#39;/g, ' ').replace(/\[/g, ' ').replace(/\]/g, ' ');
+    console.log("event_names:", event_names);
+    console.log("event_names type:", typeof event_names);
+
+    console.log("nameInput:", nameInput);
+    console.log("addRowButton:", addRowButton);
+
+    event_names = event_names.split(',').map(name => name.trim());
+
+    // ボタンが押されたときにチェックするイベントリスナー
+    addRowButton.addEventListener("click", function (event) {
+        const inputValue = nameInput.value.trim(); // 空白を削除して取得
+        console.log("event_names:", event_names);
+        console.log("event_names type:", typeof event_names);
+        // 変数の値をコンソールに出力
+        console.log("inputValue:", inputValue);
+        addRowButton.disabled = false;
+
+        event_names.forEach(function (value) {
+            if (inputValue === value) {
+                // addRowButton.disabled = true;
+                // const warningMessage = document.createElement("span");
+                // warningMessage.textContent = "この名前は既に存在します。";
+                // warningMessage.style.color = "red";
+                // warningMessage.id = "warningMessage";
+                if (!document.getElementById("warningMessage")) {
+                    alert("この名前は既に存在します。");
+                }
+                console.log("addRowButton.disabled:", addRowButton.disabled);
+                event.preventDefault(); // フォームの送信を防ぐ
+            } else {
+                console.log("addRowButton.disabled:", addRowButton.disabled);
+            }
+        });
+    });
+</script>
+{% endblock %}

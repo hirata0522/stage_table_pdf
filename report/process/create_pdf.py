@@ -14,6 +14,7 @@ def create_pdf(
     row_heights=[110, 40],
     header_height=20,
     page_num_font_size=13,
+    leading=15,  # 行間を指定する引数を追加
 ):
     # 日本語フォントを登録（NotoSansJP の例）
     # GoogleフォントからNotoSansJPをダウンロードする必要があります
@@ -58,6 +59,7 @@ def create_pdf(
             ("GRID", (0, 0), (-1, -1), 1, colors.black),  # グリッド線を表示
             ("ALIGN", (0, 0), (-1, -1), "LEFT"),  # 文字を右揃え
             ("BACKGROUND", (0, 0), (-1, 0), colors.lightgrey),  # ヘッダーの背景色
+            ("LEADING", (2, 0), (-1, -1), leading),  # 行間を設定
         ]
     )
 

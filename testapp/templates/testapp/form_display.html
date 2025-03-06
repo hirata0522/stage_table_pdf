@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+    .custom-container {
+        margin-left: 80px;
+        margin-right: 200px;
+    }
+</style>
+<div class="custom-container mt-4">
+    <div class="row">
+
+        <div class="col-md-8">
+            <h3 style="display: inline;">Project name : </h3>
+            <h2 style="display: inline;">{{project_name}}</h2>
+            <hr>
+            <form action="/projects/{{project_name}}" method="POST">
+                <div class="grid-container">
+                    <div class="itema">
+                        <h4>進行名</h4>
+                    </div>
+                    <div class="itemb">
+                        <h4>舞台</h4>
+                    </div>
+                    <div class="itemc">
+                        <h4>照明</h4>
+                    </div>
+                    <div class="itemd">
+                        <h4>音響</h4>
+                    </div>
+                    <div class="iteme">
+                        <h4>幕</h4>
+                    </div>
+                    <div class="item1"> <textarea class="Textarea_1" id="input1" name="input1"></textarea>
+                    </div>
+                    <div class="item2"> <textarea class="Textarea_a" id="input2" name="input2">
+引割3
+──〰〰〰〰〰〰〰〰〰〰〰〰〰〰──
+
+
+引割1
+──〰〰〰〰〰〰〰〰〰〰〰〰〰〰──
+
+緞帳
+──〰〰〰〰〰〰〰〰〰〰〰〰〰〰──
+                    </textarea>
+                    </div>
+                    <div class="item3"> <textarea class="Textarea_2" id="input3" name="input3"></textarea>
+                    </div>
+                    <div class="item4"> <textarea class="Textarea_3" id="input4" name="input4"></textarea>
+                    </div>
+                    <div class="item5"> <textarea class="Textarea_3" id="input5" name="input5"></textarea>
+                    </div>
+                    <div class="item6"> <textarea class="Textarea_b" id="input6" name="input6"></textarea>
+                    </div>
+                    <div class="item7"> <textarea class="Textarea_4" id="input7" name="input7"></textarea>
+                    </div>
+                </div>
+
+                <hr>
+                {% if index_max != 0 %}
+                <div class="additional-content">
+                    <label for="current_index">現在のページ:</label>
+                    <input type="number" id="current_index" name="current_index" min="{{ index_min }}"
+                        max="{{ index_max }}" step="1" value="{{ index_initial }}" required
+                        oninput="validity.valid||(value='');">
+                </div>
+                <hr>
+                {% endif %}
+                <button type="submit" name="action" value="submit" class="btn btn-primary">
+                    追加</button>:現在のページの後ろに追加<br>
+                {% if index_max != 0 %}
+                <button type="submit" name="action" value="edit" class="btn btn-secondary">編集</button>:現在のページを編集<br>
+                <button type="submit" name="action" value="delete" class="btn btn-danger">削除</button>:現在のページを削除<br>
+                {% endif %}
+                <div class="toggle_button">
+                    <input id="toggle" class="toggle_input" type='checkbox' onchange="toggleContent()" />
+                    <label for="toggle" class="toggle_label"></label>
+                </div>
+                <div id="toggleContent" style="display: none; margin-top: 20px;">
+                    <!-- Your content here -->
+                    <br>
+                    {% if index_max != 0 %}
+                    <div style="margin-bottom: 10px;">
+                        <p>
+                            <button type="submit" name="action" value="delete_group" class="btn btn-danger">削除</button>
+
+                            ページ <input type="number" id="start_index" name="start_index" min="{{ index_min }}"
+                                max="{{ index_max }}" step="1" value="{{ index_initial }}"
+                                oninput="validity.valid||(value='');">
+
+                            からページ <input type="number" id="end_index" name="end_index" min="{{ index_min }}"
+                                max="{{ index_max }}" step="1" value="{{ index_initial }}"
+                                oninput="validity.valid||(value='');">
+                            をまとめて削除
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+                <script>
+                    function toggleContent() {
+                        var checkBox = document.getElementById("toggle");
+                        var content = document.getElementById("toggleContent");
+                        if (checkBox.checked == true) {
+                            content.style.display = "block";
+                        } else {
+                            content.style.display = "none";
+                        }
+                    }
+                </script>
+            </form>
+
+        </div>
+        <div class="col-md-4 text-right">
+            <embed src="{{ url_for('static', filename='output/' ~ project_name ~ '.pdf') }}#page={{ page_number }}"
+                type="application/pdf" width="100%" height="780px" style="float: right;" />
+        </div>
+    </div>
+</div>
+{% endblock %}
