@@ -5,8 +5,10 @@ h1 {
 
 textarea {
     resize: none;
-    width: 295px;
-    height: 200px;
+    width: 18.4375em;
+    /* 295px / 16 */
+    height: 12.5em;
+    /* 200px / 16 */
 }
 
 /* スクロールバー非表示（Chrome・Safari） */
@@ -36,58 +38,65 @@ textarea {
 
 .TextareaWrapper {
     width: 100%;
-    max-width: 400px;
+    max-width: 25em;
+    /* 400px / 16 */
 }
 
 
 .Textarea_a {
-    padding: 10px;
-    width: 310px;
-    height: 230px;
+    padding: 0.625em;
+    width: 19.375em;
+    /* 310px / 16 */
+    height: 14.375em;
+    /* 230px / 16 */
     resize: none;
 }
 
 .Textarea_b {
-    padding: 10px;
-    width: 310px;
-    height: 80px;
+    padding: 0.625em;
+    width: 19.375em;
+    height: 5em;
     resize: none;
 }
 
 .Textarea_1 {
-    padding: 10px;
-    width: 110px;
-    height: 320px;
+    padding: 0.625em;
+    width: 6.875em;
+    height: 20em;
     resize: none;
 }
 
 .Textarea_2 {
-    padding: 10px;
-    width: 165px;
-    height: 230px;
+    padding: 0.625em;
+    width: 10.3125em;
+    /* 165px / 16 */
+    height: 14.375em;
+    /* 230px / 16 */
     resize: none;
 }
 
 .Textarea_3 {
-    padding: 10px;
-    width: 130px;
-    height: 230px;
+    padding: 0.625em;
+    width: 8.125em;
+    height: 14.375em;
     resize: none;
 }
 
 .Textarea_4 {
-    padding: 10px;
-    width: 445px;
-    height: 80px;
+    padding: 0.625em;
+    width: 27.8125em;
+    /* 445px / 16 */
+    height: 5em;
+    /* 80px / 16 */
     resize: none;
 }
 
 
 .grid-container {
     display: grid;
-    grid-template-columns: 110px 310px 165px 130px 130px;
-    grid-template-rows: 40px 230px 80px;
-    gap: 10px;
+    grid-template-columns: 6.875em 19.375em 10.3125em 8.125em 8.125em;
+    grid-template-rows: 2.5em 14.375em 5em;
+    gap: 0.625em;
 }
 
 .itema {
@@ -175,12 +184,15 @@ textarea {
 }
 
 .toggle_label {
-    width: 45px;
-    height: 25px;
+    width: 2.8125em;
+    /* 45px / 16 */
+    height: 1.5625em;
+    /* 25px / 16 */
     background: #ccc;
     position: relative;
     display: inline-block;
-    border-radius: 40px;
+    border-radius: 2.5em;
+    /* 40px / 16 */
     transition: 0.4s;
     box-sizing: border-box;
     /* float: right; */
@@ -189,14 +201,17 @@ textarea {
 .toggle_label:after {
     content: "";
     position: absolute;
-    width: 25px;
-    height: 25px;
+    width: 1.5625em;
+    /* 25px / 16 */
+    height: 1.5625em;
+    /* 25px / 16 */
     border-radius: 100%;
     left: 0;
     top: 0;
     z-index: 2;
     background: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0.3125em rgba(0, 0, 0, 0.2);
+    /* 5px / 16 */
     transition: 0.4s;
 }
 
@@ -205,19 +220,22 @@ textarea {
 }
 
 .toggle_input:checked+.toggle_label:after {
-    left: 20px;
+    left: 1.25em;
+    /* 20px / 16 */
 }
 
 .toggle_button {
     position: relative;
-    width: 45px;
-    height: 25px;
+    width: 2.8125em;
+    /* 45px / 16 */
+    height: 1.5625em;
+    /* 25px / 16 */
     margin: auto;
     float: left;
 }
 
 p {
-    text-indent: 1rem;
+    text-indent: 1em;
 }
 
 
@@ -238,11 +256,98 @@ a.large {
     font-size: 1.2em;
 }
 
+.original-button_submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.125em;
+    /* 18px / 16 */
+    border-radius: 0.5em;
+    /* 8px / 16 */
+    width: 5em;
+    /* 80px / 16 */
+    height: 2.5em;
+    /* 40px / 16 */
+    font-weight: bold;
+    transition: 0.3s;
+    background-color: #1976d2;
+}
+
+.original-button_submit:hover {
+    opacity: .7;
+}
+
+.original-button_edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.125em;
+    /* 18px / 16 */
+    border-radius: 0.5em;
+    /* 8px / 16 */
+    width: 5em;
+    /* 80px / 16 */
+    height: 2.5em;
+    /* 40px / 16 */
+    font-weight: bold;
+    transition: 0.3s;
+    background-color: #908d8d;
+}
+
+.original-button_edit:hover {
+    opacity: .7;
+}
+
+.original-button_delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.125em;
+    /* 18px / 16 */
+    border-radius: 0.5em;
+    /* 8px / 16 */
+    width: 5em;
+    /* 80px / 16 */
+    height: 2.5em;
+    /* 40px / 16 */
+    font-weight: bold;
+    transition: 0.3s;
+    background-color: #e53935;
+}
+
+.original-button_delete:hover {
+    opacity: .7;
+}
+
 .list-9 {
-    list-style-type: disc;
-    list-style-position: inside;
-    padding: 1em;
-    border: 2px solid #62b7f4;
+    width: 50em;
+    /* 800px / 16 */
+    border: 0.125em solid #62b7f4;
+    /* 2px / 16 */
+    border-radius: 0.625em;
+    /* 10px / 16 */
+    list-style: none;
+    padding: 0.8em 2em 0.8em;
+    position: relative;
+    margin: 1em 1em;
+    /* Added margin for vertical spacing */
+}
+
+.list-9 li:first-child {
+    padding-top: .5em;
+}
+
+.list-9 li:last-child {
+    padding-bottom: .5em;
 }
 
 .list-9 li {
@@ -250,7 +355,8 @@ a.large {
 }
 
 .list-9 li:not(:last-child) {
-    border-bottom: 1px dashed #62b7f4;
+    border-bottom: 0.0625em dashed #62b7f4;
+    /* 1px / 16 */
 }
 
 .list-9 li::marker {
@@ -260,4 +366,125 @@ a.large {
 
 span {
     white-space: nowrap;
+}
+
+.accordion-004 {
+    max-width: 31.25em;
+    /* 500px / 16 */
+    margin-bottom: 0.4375em;
+    /* 7px / 16 */
+    border: 0.125em solid #bdbdbd;
+    /* 2px / 16 */
+    border-radius: 0.3125em;
+    /* 5px / 16 */
+}
+
+.accordion-004 summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 1em 2em;
+    color: #303030;
+    font-weight: 600;
+    cursor: pointer;
+    text-indent: 0;
+}
+
+.accordion-004 summary::-webkit-details-marker {
+    display: none;
+}
+
+.accordion-004 summary::before,
+.accordion-004 summary::after {
+    width: 0.1875em;
+    /* 3px / 16 */
+    height: 0.9em;
+    border-radius: 0.3125em;
+    /* 5px / 16 */
+    background-color: #303030b3;
+    content: '';
+}
+
+.accordion-004 summary::before {
+    position: absolute;
+    right: 2em;
+    rotate: 90deg;
+}
+
+.accordion-004 summary::after {
+    transition: rotate .3s;
+}
+
+.accordion-004[open] summary::after {
+    rotate: 90deg;
+}
+
+.accordion-004 p {
+    transform: translateY(-0.625em);
+    /* 10px / 16 */
+    opacity: 0;
+    margin: 0;
+    padding: .3em 2em 1.5em;
+    color: #303030;
+    transition: transform .5s, opacity .5s;
+}
+
+.accordion-004[open] p {
+    transform: none;
+    opacity: 1;
+}
+
+.tooltip-005 {
+    display: inline-block;
+    position: relative;
+}
+
+.tooltip-005 svg {
+    width: 2em;
+    height: 2em;
+    cursor: pointer;
+}
+
+.tooltip-005 p {
+    display: flex;
+    justify-content: flex-start;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 12.5em;
+    /* 200px / 16 */
+    left: 0;
+    transform: translate(0, 0);
+    padding: 0.5em 1em;
+    border-radius: 0.1875em;
+    /* 3px / 16 */
+    background-color: #00000099;
+    color: #fff;
+    font-size: 1em;
+    white-space: nowrap;
+    transition: opacity 0.3s;
+    text-indent: 0;
+    /* Added to prevent initial indent */
+}
+
+.tooltip-005:hover>p {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-005 p::before {
+    position: absolute;
+    left: 0.625em;
+    /* 10px / 16 */
+    top: -0.375em;
+    /* -6px / 16 */
+    transform: translateX(0);
+    width: 0.5625em;
+    /* 9px / 16 */
+    height: 0.375em;
+    /* 6px / 16 */
+    background-color: inherit;
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+    content: '';
 }

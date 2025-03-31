@@ -2,19 +2,19 @@
 
 ## Overview
 
-pythonを用いてステージ表のpdfを作成するコード
+python (flask) を用いたステージ表作成を支援するwebアプリ
 
 ## How to Use
 
-`/report/make_pdf.py`内のdataを任意に書き換えたのち
+`/workspaces/my_project`において
 
 ```sh
-rye run python python report/make_pdf.py 
+rye run python server.py 
 ```
 
 を実行します
 
-出力は`/output`内に保存されています
+実行後、localでwebページ([http://127.0.0.1:5000/](http://127.0.0.1:5000/))が確認できるようになるはずです
 
 ## 環境構築
 
@@ -22,8 +22,8 @@ Docker環境の構築を行ったのち、このディレクトリでコンテ�
 
 Docker, pythonに関する設定は[koki-algebraさんのテンプレート](https://github.com/koki-algebra/python_docker)をそのまま流用させていただきました
 
-詳細な説明は元レポジトリより引用した**Python with Rye**のセクションを参考にしてください
-
+詳細な説明は元レポジトリを参考にしてください
+<!-- 
 # Python with Rye (元レポジトリより引用)
 
 ## Overview
@@ -76,4 +76,4 @@ VSCode 上で notebook を実行することができる. notebook を開き, Se
 
 ```sh
 rye add torch && rye sync
-```
+``` -->

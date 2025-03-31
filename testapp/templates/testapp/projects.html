@@ -49,21 +49,30 @@
     </style>
 </head>
 
-<div style="margin-left: 400px; margin-right: 400px; margin-top: 50px;">
-    <ul class="list-9">
+<div style="display: flex; justify-content: center; margin-top: 50px;">
+    <ul class="list-9" style="width: 100%; max-width: 600px;">
         {% for event in event_names %}
-        <li>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
             <a href="/projects/{{ event }}" class="large">{{ event }}</a>
-        </li>
+            <form action="/projects" method="POST" style="display:inline;">
+                <input type="hidden" name="event" value="{{ event }}">
+                <button class="original-button_delete" type="submit" style="display: inline;" name="action"
+                    value="delete">削除</button>
+            </form>
+        </div>
+
+        {% if not loop.last %}
+        <hr>
+        {% endif %}
         {% endfor %}
     </ul>
 </div>
 
 <div class="container" style="text-align: center; margin-top: 50px;">
-    <form action="/projects" method="GET">
-        <span>
-            <input type="text" id="nameInput" name="name" style="width: 100%;"><button id="addRow">追加</button>
-        </span>
+    <form action="/projects" method="POST" style="display: flex; justify-content: center; align-items: center;">
+        <input type="text" id="nameInput" name="name" style="width: 70%; margin-right: 8px;">
+        <button type="submit" name="action" value="submit" class="original-button_submit">追加</button>
     </form>
 </div>
 <script>

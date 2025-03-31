@@ -3,15 +3,15 @@
 {% block content %}
 <style>
     .custom-container {
-        margin-left: 80px;
-        margin-right: 200px;
+        margin-left: 8%;
+        margin-right: 8%;
     }
 </style>
 <div class="custom-container mt-4">
     <div class="row">
 
         <div class="col-md-8">
-            <h3 style="display: inline;">Project name : </h3>
+            <!-- <h3 style="display: inline;">Project nam: </h3> -->
             <h2 style="display: inline;">{{project_name}}</h2>
             <hr>
             <form action="/projects/{{project_name}}" method="POST">
@@ -56,64 +56,213 @@
                     <div class="item7"> <textarea class="Textarea_4" id="input7" name="input7"></textarea>
                     </div>
                 </div>
+                <br>
+                <details class="accordion-004" style="max-width: 90%; padding:.3em 1em 0.5em;">
 
+                    <summary>入力補助</summary>
+                    <p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>照明</h5>
+                            <select id="select-light-1" style="display: inline;">
+                                <option value="">(番号なし)</option>
+                                <option value="① ">①</option>
+                                <option value="② ">②</option>
+                                <option value="③ ">③</option>
+                                <option value="④ ">④</option>
+                                <option value="⑤ ">⑤</option>
+                            </select>
+                            <select id="select-light-2" style="display: inline;">
+                                <option value="客照">客照</option>
+                                <!-- <option value="ステージ内照明">ステージ内照明</option> -->
+                                <option value="ピン">ピン</option>
+                                <option value="サス">サス</option>
+                                <option value="シーリング">シーリング</option>
+                                <option value="ホリ">ホリ</option>
+                            </select>
+                            <select id="select-light-3" style="display: inline;">
+                                <option value="cut in">cut in</option>
+                                <option value="cut out">cut out</option>
+                                <option value="fade in">fade in</option>
+                                <option value="fade out">fade out</option>
+                            </select>
+                            <br>
+                            <button type="button"
+                                onclick="setTextareaValue('input3', 'select-light-1', 'select-light-2', 'select-light-3')">Set
+                                Text</button>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>音響</h5>
+                            <!-- <label for="select-sound-1">Select Option 1:</label> -->
+                            <select id="select-sound-1" style="display: inline;">
+                                <option value="">(番号なし)</option>
+                                <option value="① ">①</option>
+                                <option value="② ">②</option>
+                                <option value="③ ">③</option>
+                                <option value="④ ">④</option>
+                                <option value="⑤ ">⑤</option>
+                            </select>
+                            <!-- <br> -->
+                            <!-- <label for="select-sound-2">Select Option 2:</label> -->
+                            <select id="select-sound-2" style="display: inline;" onchange="updateSoundOptions()">
+                                <option value="曲">曲</option>
+                                <option value="客室BGM">客室BGM</option>
+                                <option value="ブザー">ブザー</option>
+                                <option value="影アナ">影アナ</option>
+                            </select>
+                            <!-- <br> -->
+                            <!-- <label for="select-sound-3">Select Option 3:</label> -->
+                            <select id="select-sound-3" style="display: inline;">
+                                <option value="cut in">cut in</option>
+                                <option value="cut out">cut out</option>
+                                <option value="fade in">fade in</option>
+                                <option value="fade out">fade out</option>
+                                <option value="">-</option>
+                            </select>
+                            <script>
+                                function updateSoundOptions() {
+                                    const sound2 = document.getElementById('select-sound-2').value;
+                                    const sound3 = document.getElementById('select-sound-3');
+                                    if (sound2 !== '曲') {
+                                        sound3.value = '';
+                                    }
+                                }
+                            </script>
+                            <br>
+                            <button type="button"
+                                onclick="setTextareaValue('input4', 'select-sound-1', 'select-sound-2', 'select-sound-3')">Set
+                                Text</button>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>幕</h5>
+                            <!-- <label for="select-curtain-1">Select Option 1:</label> -->
+                            <select id="select-curtain-1" style="display: inline;">
+                                <option value="">(番号なし)</option>
+                                <option value="① ">①</option>
+                                <option value="② ">②</option>
+                                <option value="③ ">③</option>
+                                <option value="④ ">④</option>
+                                <option value="⑤ ">⑤</option>
+                            </select>
+                            <!-- <br> -->
+                            <!-- <label for="select-curtain-2">Select Option 2:</label> -->
+                            <select id="select-curtain-2" style="display: inline;">
+                                <option value="引割3">引割3</option>
+                                <option value="引割1">引割1</option>
+                                <option value="緞帳">緞帳</option>
+                            </select>
+                            <!-- <br> -->
+                            <!-- <label for="select-curtain-3">Select Option 3:</label> -->
+                            <select id="select-curtain-3" style="display: inline;">
+                                <option value="閉める">閉める</option>
+                                <option value="開ける">開ける</option>
+                            </select>
+                            <br>
+                            <button type="button"
+                                onclick="setTextareaValue('input5', 'select-curtain-1', 'select-curtain-2', 'select-curtain-3')">Set
+                                Text</button>
+                        </div>
+
+                        <script>
+                            function setTextareaValue(textareaId, selectId1, selectId2, selectId3) {
+                                const value1 = document.getElementById(selectId1).value;
+                                const value2 = document.getElementById(selectId2).value;
+                                const value3 = document.getElementById(selectId3).value;
+                                const textarea = document.getElementById(textareaId);
+                                textarea.value += `${value1}${value2} ${value3}\n`;
+                            }
+                        </script>
+                    </div>
+
+                </details>
                 <hr>
                 {% if index_max != 0 %}
                 <div class="additional-content">
-                    <label for="current_index">現在のページ:</label>
+                    <label for="current_index">
+                        <h4>現在のページ：</h4>
+                    </label>
                     <input type="number" id="current_index" name="current_index" min="{{ index_min }}"
                         max="{{ index_max }}" step="1" value="{{ index_initial }}" required
                         oninput="validity.valid||(value='');">
                 </div>
                 <hr>
                 {% endif %}
-                <button type="submit" name="action" value="submit" class="btn btn-primary">
-                    追加</button>:現在のページの後ろに追加<br>
-                {% if index_max != 0 %}
-                <button type="submit" name="action" value="edit" class="btn btn-secondary">編集</button>:現在のページを編集<br>
-                <button type="submit" name="action" value="delete" class="btn btn-danger">削除</button>:現在のページを削除<br>
-                {% endif %}
-                <div class="toggle_button">
-                    <input id="toggle" class="toggle_input" type='checkbox' onchange="toggleContent()" />
-                    <label for="toggle" class="toggle_label"></label>
-                </div>
-                <div id="toggleContent" style="display: none; margin-top: 20px;">
-                    <!-- Your content here -->
-                    <br>
-                    {% if index_max != 0 %}
-                    <div style="margin-bottom: 10px;">
-                        <p>
-                            <button type="submit" name="action" value="delete_group" class="btn btn-danger">削除</button>
+                <h4>操作</h4>
 
-                            ページ <input type="number" id="start_index" name="start_index" min="{{ index_min }}"
-                                max="{{ index_max }}" step="1" value="{{ index_initial }}"
-                                oninput="validity.valid||(value='');">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div style="display: inline;" class="tooltip-005">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM13 13.3551C14.4457 12.9248 15.5 11.5855 15.5 10C15.5 8.067 13.933 6.5 12 6.5C10.302 6.5 8.88637 7.70919 8.56731 9.31346L10.5288 9.70577C10.6656 9.01823 11.2723 8.5 12 8.5C12.8284 8.5 13.5 9.17157 13.5 10C13.5 10.8284 12.8284 11.5 12 11.5C11.4477 11.5 11 11.9477 11 12.5V14H13V13.3551Z"
+                                    fill="#707070"></path>
+                            </svg>
+                            <p>
+                                追加：現在のページの後ろに追加<br>
+                                編集：現在のページを編集<br>
+                                削除：現在のページを削除
+                            </p>
+                        </div>
+                        <button style="display: inline; margin-right: 0.5em;" type="submit" name="action" value="submit"
+                            class="original-button_submit">追加</button>
+                        <!-- <h5 style="display: inline;">ああ</h5> -->
 
-                            からページ <input type="number" id="end_index" name="end_index" min="{{ index_min }}"
-                                max="{{ index_max }}" step="1" value="{{ index_initial }}"
-                                oninput="validity.valid||(value='');">
-                            をまとめて削除
-                        </p>
+                        {% if index_max != 0 %}
+                        <button style="display: inline; margin-right: 0.5em;" type="submit" name="action" value="edit"
+                            class="original-button_edit">編集</button>
+                        <button style="display: inline; margin-right: 0.25em;" type="submit" name="action"
+                            value="delete" class="original-button_delete">削除</button>
+                        {% endif %}
+
+
                     </div>
-                    {% endif %}
+                    <div class="col-md-7 text-right">
+                        <details class="accordion-004">
+                            <summary>高度な操作</summary>
+                            <p>
+                                {% if event_names %}
+                                <button style="display: inline; margin-left: 0;" type="submit" name="action"
+                                    value="import_group" class="original-button_submit">追加</button>
+                                <strong>：</strong>
+                                <select name="import_project" style="display: inline; margin-left:0;">
+                                    {% for event in event_names %}
+                                    <option value="{{ event }}">{{ event }}</option>
+                                    {% endfor %}
+                                </select><br>
+                                <strong style="margin-left: 7.5em;">を現在のページの後ろに追加</strong>
+                                <br>
+                                {% endif %}
+                                {% if index_max != 0 %}
+                                <button style="display: inline; margin-left: 1em;" type="submit" name="action"
+                                    value="delete_group" class="original-button_delete">削除</button>
+                                <strong>：ページ</strong>
+                                <input style="display: inline; margin-left: 0.5em;" type="number" id="start_index"
+                                    name="start_index" min="{{ index_min }}" max="{{ index_max }}" step="1"
+                                    value="{{ index_initial }}" oninput="validity.valid||(value='');">
+                                <strong>からページ</strong>
+                                <input style="display: inline; margin-left: 0.5em;" type="number" id="end_index"
+                                    name="end_index" min="{{ index_min }}" max="{{ index_max }}" step="1"
+                                    value="{{ index_initial }}" oninput="validity.valid||(value='');">
+                                <strong>を削除</strong>
+                                {% endif %}
+
+                            </p>
+
+
+                        </details>
+                    </div>
                 </div>
-                <script>
-                    function toggleContent() {
-                        var checkBox = document.getElementById("toggle");
-                        var content = document.getElementById("toggleContent");
-                        if (checkBox.checked == true) {
-                            content.style.display = "block";
-                        } else {
-                            content.style.display = "none";
-                        }
-                    }
-                </script>
+
             </form>
 
         </div>
         <div class="col-md-4 text-right">
-            <embed src="{{ url_for('static', filename='output/' ~ project_name ~ '.pdf') }}#page={{ page_number }}"
-                type="application/pdf" width="100%" height="780px" style="float: right;" />
+            <div
+                style="position: relative; width: 100%; height: 0; padding-bottom: 150%; /* Aspect ratio for A4 (1:√2) */">
+                <iframe src="{{ url_for('static', filename='output/' ~ project_name ~ '.pdf') }}#page={{ page_number }}"
+                    type="application/pdf"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+            </div>
         </div>
     </div>
 </div>
