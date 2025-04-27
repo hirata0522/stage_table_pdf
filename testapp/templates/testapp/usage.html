@@ -1,6 +1,60 @@
 {% extends "layout.html" %}
 
 {% block content %}
-usage
+<style>
+    .custom-container {
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-top: 3%;
+        font-size: 1.1em;
+        line-height: 1.8em;
+    }
+</style>
+<div class="custom-container mt-8">
+    <div class="row">
+        <div class="col-md-9">
+
+            ここではこのサイトの使用方法を説明します<br>
+            何もない場合は、<br>
+            <h2 class="heading-22">ステージ表の作成</h2>
+            <div style="margin-left: 1em;">
+                <h3 class="heading-1">プロジェクトの作成・削除</h3>
+                <img src="{{ url_for('static', filename='images/project_big.png') }}"
+                    style="width: 100%; border: 0.05em solid black;">
+
+                <h3>プロジェクトの編集</h3>
+                <img src="{{ url_for('static', filename='images/edit.png') }}"
+                    style="width: 100%; border: 0.05em solid black;">
+                <img src="{{ url_for('static', filename='images/input_assist.png') }}"
+                    style="width: 100%; border: 0.05em solid black;">
+                <img src="{{ url_for('static', filename='images/sousa.png') }}"
+                    style="width: 100%; border: 0.05em solid black;">
+            </div>
+            <h4>編集画面</h4>
+            <h4>編集方法</h4>
+            <h5>入力補助</h5>
+            <h4>ステージ表を提出する人</h4>
+            <h4>ステージ表を作成する人</h4>
+
+        </div>
+        <div class="col-md-3">
+            <div class="toc-002">
+                <div>
+                    目次
+                </div>
+                <ol>
+                    <li><a href="#">見出し1</a></li>
+                    <li>
+                        <a href="#">見出し2</a>
+                        <ol>
+                            <li><a href="#">見出し2-1</a></li>
+                            <li><a href="#">見出し2-2</a></li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

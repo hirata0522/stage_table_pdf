@@ -1,8 +1,3 @@
-h1 {
-    color: blue;
-    border-bottom: double 6px #87CEFA;
-}
-
 textarea {
     resize: none;
     width: 18.4375em;
@@ -452,15 +447,15 @@ span {
     visibility: hidden;
     opacity: 0;
     position: absolute;
-    top: 12.5em;
+    top: 2.5em;
     /* 200px / 16 */
     left: 0;
     transform: translate(0, 0);
     padding: 0.5em 1em;
     border-radius: 0.1875em;
     /* 3px / 16 */
-    background-color: #00000099;
-    color: #fff;
+    background-color: #424242;
+    color: #ffffff;
     font-size: 1em;
     white-space: nowrap;
     transition: opacity 0.3s;
@@ -487,4 +482,105 @@ span {
     background-color: inherit;
     clip-path: polygon(50% 0, 0 100%, 100% 100%);
     content: '';
+}
+
+
+.list-11 {
+    font-size: large;
+    list-style-type: disc;
+    padding: 1em 1em 1em 2.5em;
+    border-left: 0.3em solid #2589d0;
+    background-color: #f2f2f2;
+}
+
+.list-11 li {
+    padding: .3em .3em .3em 0;
+}
+
+.list-11 li::marker {
+    color: #2589d0;
+    font-size: 1.1em;
+}
+
+
+.toc-002 {
+    margin-bottom: 1.875em;
+    /* 30px / 16 */
+    border: 0.125em solid #2589d0;
+    /* 2px / 16 */
+    border-radius: 0.1875em;
+    /* 3px / 16 */
+}
+
+.toc-002 div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0.625em 0;
+    /* 10px / 16 */
+    background-color: #2589d0;
+    color: #fff;
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.toc-002 div::before {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.3125em;
+    /* 5px / 16 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 4H21V6H8V4ZM3 3.5H6V6.5H3V3.5ZM3 10.5H6V13.5H3V10.5ZM3 17.5H6V20.5H3V17.5ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z' fill='%23fff'%3E%3C/path%3E%3C/svg%3E");
+    content: '';
+}
+
+.toc-002 ol {
+    list-style-type: disc;
+    margin: 0;
+    overflow: hidden;
+}
+
+.toc-002>ol {
+    padding: 1em 1em 1em 2.5em;
+    /* Increased padding-left to ensure the bullet points remain visible */
+}
+
+.toc-002 ol ol {
+    margin-top: 0.3125em;
+    /* 5px / 16 */
+    padding-left: 1.5em;
+    /* Adjusted padding for nested lists */
+}
+
+.toc-002 li {
+    padding: 0.3125em 0;
+    /* 5px / 16 */
+    font-weight: 600;
+    font-size: 1.3em;
+    /* Increased font size */
+}
+
+.toc-002 ol ol li {
+    font-weight: 500;
+    font-size: 0.8em;
+    /* Adjusted font size for nested lists */
+}
+
+.toc-002 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.heading-1 {
+    padding: .5em .7em;
+    border-left: 0.18em solid #2589d0;
+    color: #333333;
+}
+
+.heading-22 {
+    padding: .5em .7em;
+    border-left: 0.18em solid #2589d0;
+    background-color: #f2f2f2;
+    color: #333333;
 }

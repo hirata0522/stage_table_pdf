@@ -12,8 +12,10 @@
 
         <div class="col-md-8">
             <!-- <h3 style="display: inline;">Project nam: </h3> -->
-            <h2 style="display: inline;">{{project_name}}</h2>
-            <hr>
+            <h2 class="heading-1">{{project_name}}</h2>
+            <!-- <br> -->
+            <!-- <h2 style="display: inline;">{{project_name}}</h2> -->
+            <br>
             <form action="/projects/{{project_name}}" method="POST">
                 <div class="grid-container">
                     <div class="itema">
@@ -62,10 +64,208 @@
                     <summary>入力補助</summary>
                     <p>
                     <div class="row">
+                        {% if index_max != 0 %}
+                        <div class="col-md-4">
+                            <h5>コピー</h5>
+                            <input style="display: inline; margin-left: 0.5em;" type="number" id="copy_index"
+                                name="copy_index" min="{{ index_min }}" max="{{ index_max }}" step="1"
+                                value="{{ index_initial }}" oninput="validity.valid||(value='');">
+                            行目をコピー
+                            <button type="button" class="original-button_edit"
+                                style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em;"
+                                onclick="populateInputs()">入力</button>
+
+                            <script>
+                                // data_listはPython側で定義されていると仮定します
+
+                                // eslint-disable-next-line no-redeclare
+                                var data_list = {{ data_list| tojson | safe }};
+
+                                // console.log("data_list:", data_list);
+                                function populateInputs() {
+                                    const copyIndex = parseInt(document.getElementById('copy_index').value, 10);
+                                    const targetIndex = copyIndex - 1;
+
+                                    if (targetIndex >= 0 && targetIndex < data_list.length) {
+                                        console.log("data_list:", data_list);
+                                        const data = data_list[targetIndex];
+                                        console.log("data:", data);
+                                        document.getElementById('input1').value = data[0] || '';
+                                        document.getElementById('input2').value = data[1] || '';
+                                        document.getElementById('input3').value = data[2] || '';
+                                        document.getElementById('input4').value = data[3] || '';
+                                        document.getElementById('input5').value = data[4] || '';
+                                        document.getElementById('input6').value = data[5] || '';
+                                        document.getElementById('input7').value = data[6] || '';
+                                    } else {
+                                        alert("指定されたインデックスが範囲外です。");
+                                    }
+                                }
+                                const index_max = "{{ index_max }}";
+                                const index_initial = "{{ index_initial }}";
+                                // ページ表示時に条件を満たす場合にpopulateInputsを実行
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    if (index_max != 0) {
+                                        populateInputs();
+                                    }
+                                });
+                            </script>
+                        </div>
+                        {% endif %}
+                        <div class="col-md-4">
+                            <h5>舞台</h5>
+                            <select id="select-stage-1" style="display: inline;">
+                                <option value="引割3">引割3
+                                </option>
+                                <option value="引割1">引割1
+                                </option>
+                                <option value="緞帳">緞帳
+                                </option>
+                            </select>
+                            <select id="select-stage-2" style="display: inline;">
+                                <option
+                                    value="──&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;──">
+                                    開ける</option>
+                                <option value="──〰〰〰〰〰〰〰〰〰〰〰〰〰〰──">閉める</option>
+                            </select>
+                            <button type="button" class="original-button_edit"
+                                style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em;"
+                                onclick="replaceTextareaLine('input2', 'select-stage-1', 'select-stage-2')">入力</button>
+
+                            <script>
+                                function replaceTextareaLine(textareaId, selectId1, selectId2) {
+                                    const textarea = document.getElementById(textareaId);
+                                    const select1Value = document.getElementById(selectId1).value;
+                                    const select2Value = document.getElementById(selectId2).value;
+
+                                    const lines = textarea.value.split('\n');
+                                    for (let i = 0; i < lines.length; i++) {
+                                        if (lines[i].includes(select1Value)) {
+                                            if (i + 1 < lines.length) {
+                                                lines[i + 1] = select2Value;
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    textarea.value = lines.join('\n');
+                                }
+                            </script>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <h5>クリア</h5>
+                            <select id="select-clear" style="display: inline;">
+                                <option value="all_input">全て
+                                </option>
+                                <option value="inputs_except_2">舞台を除く全て
+                                </option>
+                                <option value="input1">進行名
+                                </option>
+                                <option value="input2">舞台
+                                </option>
+                                <option value="input3">照明
+                                </option>
+                                <option value="input4">音響
+                                </option>
+                                <option value="input5">幕
+                                </option>
+                                <option value="input6">備考1(下段左)
+                                </option>
+                                <option value="input7">備考2(下段右)
+                                </option>
+                            </select>
+                            の入力をクリア
+                            <button type="button" class="original-button_edit"
+                                style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em;"
+                                onclick="clearInput()">クリア</button>
+
+                            <script>
+                                function clearInput() {
+                                    const selectedOption = document.getElementById('select-clear').value;
+                                    if (selectedOption === 'all_input') {
+                                        document.getElementById('input1').value = '';
+                                        // document.getElementById('input2').value = '';
+                                        document.getElementById('input3').value = '';
+                                        document.getElementById('input4').value = '';
+                                        document.getElementById('input5').value = '';
+                                        document.getElementById('input6').value = '';
+                                        document.getElementById('input7').value = '';
+                                        const textarea = document.getElementById('input2');
+                                        // console.log("input2:", textarea);
+                                        const lines = textarea.value.split('\n');
+                                        // console.log("lines:", lines);
+                                        const validPrefixes = ['引割3', '引割1', '緞帳'];
+                                        const updatedLines = [];
+
+                                        for (let i = 0; i < lines.length; i++) {
+                                            const line = lines[i].trim();
+                                            // console.log("line:", line);
+                                            if (validPrefixes.some(prefix => line.startsWith(prefix))) {
+                                                updatedLines.push(line);
+                                                if (i + 1 < lines.length) {
+                                                    updatedLines.push('──〰〰〰〰〰〰〰〰〰〰〰〰〰〰──');
+                                                    i++; // Skip the next line as it is replaced
+                                                }
+                                            } else {
+                                                updatedLines.push('');
+                                            }
+                                        }
+
+                                        textarea.value = updatedLines.join('\n');
+
+
+                                    } else if (selectedOption === 'inputs_except_2') {
+                                        document.getElementById('input1').value = '';
+                                        document.getElementById('input3').value = '';
+                                        document.getElementById('input4').value = '';
+                                        document.getElementById('input5').value = '';
+                                        document.getElementById('input6').value = '';
+                                        document.getElementById('input7').value = '';
+                                    } else if (selectedOption === 'input2') {
+                                        const textarea = document.getElementById('input2');
+                                        // console.log("input2:", textarea);
+                                        const lines = textarea.value.split('\n');
+                                        // console.log("lines:", lines);
+                                        const validPrefixes = ['引割3', '引割1', '緞帳'];
+                                        const updatedLines = [];
+
+                                        for (let i = 0; i < lines.length; i++) {
+                                            const line = lines[i].trim();
+                                            // console.log("line:", line);
+                                            if (validPrefixes.some(prefix => line.startsWith(prefix))) {
+                                                updatedLines.push(line);
+                                                if (i + 1 < lines.length) {
+                                                    updatedLines.push('──〰〰〰〰〰〰〰〰〰〰〰〰〰〰──');
+                                                    i++; // Skip the next line as it is replaced
+                                                }
+                                            } else {
+                                                updatedLines.push('');
+                                            }
+                                        }
+
+                                        textarea.value = updatedLines.join('\n');
+                                    } else {
+                                        const inputElement = document.getElementById(selectedOption);
+                                        if (inputElement) {
+                                            inputElement.value = '';
+                                        }
+                                    }
+                                }
+                            </script>
+                            {% if index_max == 0 %}
+                            <div class="col-md-4">
+
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
                         <div class="col-md-4">
                             <h5>照明</h5>
                             <select id="select-light-1" style="display: inline;">
-                                <option value="">(番号なし)</option>
+                                <option value="">-</option>
                                 <option value="① ">①</option>
                                 <option value="② ">②</option>
                                 <option value="③ ">③</option>
@@ -86,16 +286,16 @@
                                 <option value="fade in">fade in</option>
                                 <option value="fade out">fade out</option>
                             </select>
-                            <br>
-                            <button type="button"
-                                onclick="setTextareaValue('input3', 'select-light-1', 'select-light-2', 'select-light-3')">Set
-                                Text</button>
+                            <!-- <br> -->
+                            <button type="button" class="original-button_edit"
+                                style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em;"
+                                onclick="setTextareaValue('input3', 'select-light-1', 'select-light-2', 'select-light-3')">入力</button>
                         </div>
                         <div class="col-md-4">
                             <h5>音響</h5>
                             <!-- <label for="select-sound-1">Select Option 1:</label> -->
                             <select id="select-sound-1" style="display: inline;">
-                                <option value="">(番号なし)</option>
+                                <option value="">-</option>
                                 <option value="① ">①</option>
                                 <option value="② ">②</option>
                                 <option value="③ ">③</option>
@@ -128,16 +328,16 @@
                                     }
                                 }
                             </script>
-                            <br>
-                            <button type="button"
-                                onclick="setTextareaValue('input4', 'select-sound-1', 'select-sound-2', 'select-sound-3')">Set
-                                Text</button>
+                            <!-- <br> -->
+                            <button type="button" class="original-button_edit"
+                                style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em;"
+                                onclick="setTextareaValue('input4', 'select-sound-1', 'select-sound-2', 'select-sound-3')">入力</button>
                         </div>
                         <div class="col-md-4">
                             <h5>幕</h5>
                             <!-- <label for="select-curtain-1">Select Option 1:</label> -->
                             <select id="select-curtain-1" style="display: inline;">
-                                <option value="">(番号なし)</option>
+                                <option value="">-</option>
                                 <option value="① ">①</option>
                                 <option value="② ">②</option>
                                 <option value="③ ">③</option>
@@ -157,10 +357,10 @@
                                 <option value="閉める">閉める</option>
                                 <option value="開ける">開ける</option>
                             </select>
-                            <br>
-                            <button type="button"
-                                onclick="setTextareaValue('input5', 'select-curtain-1', 'select-curtain-2', 'select-curtain-3')">Set
-                                Text</button>
+                            <!-- <br> -->
+                            <button type="button" class="original-button_edit"
+                                style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em;margin-bottom: 1em;"
+                                onclick="setTextareaValue('input5', 'select-curtain-1', 'select-curtain-2', 'select-curtain-3')">入力</button>
                         </div>
 
                         <script>
@@ -172,14 +372,16 @@
                                 textarea.value += `${value1}${value2} ${value3}\n`;
                             }
                         </script>
+
                     </div>
 
                 </details>
                 <hr>
+
                 {% if index_max != 0 %}
                 <div class="additional-content">
                     <label for="current_index">
-                        <h4>現在のページ：</h4>
+                        <h4>現在の行：</h4>
                     </label>
                     <input type="number" id="current_index" name="current_index" min="{{ index_min }}"
                         max="{{ index_max }}" step="1" value="{{ index_initial }}" required
@@ -198,9 +400,9 @@
                                     fill="#707070"></path>
                             </svg>
                             <p>
-                                追加：現在のページの後ろに追加<br>
-                                編集：現在のページを編集<br>
-                                削除：現在のページを削除
+                                追加：入力した内容を現在の行の後ろに追加<br>
+                                編集：現在の行を編集<br>
+                                削除：現在の行を削除
                             </p>
                         </div>
                         <button style="display: inline; margin-right: 0.5em;" type="submit" name="action" value="submit"
@@ -221,37 +423,64 @@
                             <summary>高度な操作</summary>
                             <p>
                                 {% if event_names %}
-                                <button style="display: inline; margin-left: 0;" type="submit" name="action"
-                                    value="import_group" class="original-button_submit">追加</button>
+                                <button
+                                    style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em; display: inline; "
+                                    type="submit" name="action" value="import_group"
+                                    class="original-button_submit">追加</button>
                                 <strong>：</strong>
                                 <select name="import_project" style="display: inline; margin-left:0;">
                                     {% for event in event_names %}
                                     <option value="{{ event }}">{{ event }}</option>
                                     {% endfor %}
                                 </select><br>
-                                <strong style="margin-left: 7.5em;">を現在のページの後ろに追加</strong>
+                                <a style="margin-left: 7.5em;"> を現在の行の後ろに追加 </a>
                                 <br>
                                 {% endif %}
                                 {% if index_max != 0 %}
-                                <button style="display: inline; margin-left: 1em;" type="submit" name="action"
-                                    value="delete_group" class="original-button_delete">削除</button>
-                                <strong>：ページ</strong>
+                                <button
+                                    style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em; display: inline; margin-left: 1em;"
+                                    type="submit" name="action" value="delete_group"
+                                    class="original-button_delete">削除</button>
+                                <strong>：</strong>
                                 <input style="display: inline; margin-left: 0.5em;" type="number" id="start_index"
                                     name="start_index" min="{{ index_min }}" max="{{ index_max }}" step="1"
                                     value="{{ index_initial }}" oninput="validity.valid||(value='');">
-                                <strong>からページ</strong>
+                                行目から
                                 <input style="display: inline; margin-left: 0.5em;" type="number" id="end_index"
                                     name="end_index" min="{{ index_min }}" max="{{ index_max }}" step="1"
                                     value="{{ index_initial }}" oninput="validity.valid||(value='');">
-                                <strong>を削除</strong>
+                                行目を削除
+                                <br>
                                 {% endif %}
-
+                                {% if index_max > 1 %}
+                                <button
+                                    style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em; display: inline; margin-left: 1em;"
+                                    type="submit" name="action" value="exchange"
+                                    class="original-button_edit">入れ替え</button>
+                                <strong>：</strong>
+                                <input style="display: inline; margin-left: 0.5em;" type="number" id="exchange_index_1"
+                                    name="exchange_index_1" min="{{ index_min }}" max="{{ index_max }}" step="1"
+                                    value="{{ index_initial }}" oninput="validity.valid||(value='');">
+                                行目と
+                                <input style="display: inline; margin-left: 0.5em;" type="number" id="exchange_index_2"
+                                    name="exchange_index_2" min="{{ index_min }}" max="{{ index_max }}" step="1"
+                                    value="{{ index_initial }}" oninput="validity.valid||(value='');">
+                                行目を入れ替える
+                                {% endif %}
                             </p>
 
 
                         </details>
                     </div>
                 </div>
+                <hr>
+                <h4>チェック</h4>
+                <ul class="list-11">
+                    {% for message in messages %}
+                    <li><strong>{{ message }}</strong></li>
+                    {% endfor %}
+                </ul>
+                <hr>
 
             </form>
 

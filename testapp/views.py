@@ -11,6 +11,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 from testapp import app
+from testapp.process.check import check_data
 from testapp.process.create_pdf import create_pdf
 from testapp.process.data import preprocess_data, process_data
 
@@ -60,9 +61,11 @@ def projects():
             return redirect(url_for("projects"))
     if request.method == "GET":
         # delete_orphan_parents(db)
+        print("load start")
         events = db.collection("events").stream()
+        print(events)
         event_names = [event.id for event in events]
-        # print(event_names)
+        print(event_names)
 
         return render_template("testapp/projects.html", event_names=event_names)
 
@@ -79,9 +82,11 @@ def project_form(project_name):
         docs = db.collection("events").document(project_name).collection("datas")
         docs_get = docs.order_by("index").get()
         data_list = [doc.to_dict()["data"] for doc in docs_get]
+        print(data_list)
 
         data = process_data(data_list)
-
+        check_data(data_list)
+        messages = check_data(data_list)
         create_pdf(
             output_filename=f"./testapp/static/output/{project_name}.pdf",
             data=data,
@@ -98,6 +103,8 @@ def project_form(project_name):
             index_initial=len(data_list),
             project_name=project_name,
             event_names=event_names,
+            data_list=data_list,
+            messages=messages,
         )
 
     if request.method == "POST":
@@ -105,10 +112,15 @@ def project_form(project_name):
         docs = db.collection("events").document(project_name).collection("datas")
         # if not docs.get():
         #     docs.document().set({})
+        # messages = []
         if request.form.get("action") == "submit":
             inputs = [request.form[f"input{i}"] for i in range(1, 8)]
             tmp_input = preprocess_data(inputs)
             current_index = int(request.form.get("current_index", 0))
+
+            for doc in docs.where("index", ">", current_index).get():
+                doc.reference.update({"index": doc.to_dict()["index"] + 1})
+
             docs.document().set({"index": current_index + 1, "data": tmp_input})
             index_initial = current_index + 1
             print("submit")
@@ -126,7 +138,8 @@ def project_form(project_name):
 
             # Insert imported data
             for i, doc in enumerate(docs_import_get):
-                new_index = current_index + 1 + i
+                new_index = doc.to_dict()["index"] + current_index
+                print(f"new_index: {new_index}")
                 docs.document().set({"index": new_index, "data": doc.to_dict()["data"]})
 
             index_initial = current_index + 1
@@ -149,6 +162,8 @@ def project_form(project_name):
             current_index = int(request.form.get("current_index"))
             start_index = int(request.form.get("start_index"))
             end_index = int(request.form.get("end_index"))
+            if start_index > end_index:
+                start_index, end_index = end_index, start_index
             docs_to_delete = docs.where("index", ">=", start_index).where("index", "<=", end_index).get()
 
             for doc in docs_to_delete:
@@ -161,6 +176,22 @@ def project_form(project_name):
                 index_initial = 1
 
             print("delete_group")
+
+        elif request.form.get("action") == "exchange":
+            current_index = int(request.form.get("current_index"))
+            exchange_index_1 = int(request.form.get("exchange_index_1"))
+            exchange_index_2 = int(request.form.get("exchange_index_2"))
+
+            docs_to_exchange_1 = docs.where("index", "==", exchange_index_1).get()
+            docs_to_exchange_2 = docs.where("index", "==", exchange_index_2).get()
+            for doc in docs_to_exchange_1:
+                doc.reference.update({"index": exchange_index_2})
+            for doc in docs_to_exchange_2:
+                doc.reference.update({"index": exchange_index_1})
+
+            index_initial = current_index
+
+            print("exchange")
 
         elif request.form.get("action") == "edit":
             inputs = [request.form[f"input{i}"] for i in range(1, 8)]
@@ -176,6 +207,19 @@ def project_form(project_name):
         data_list = [doc.to_dict()["data"] for doc in docs_get]
 
         data = process_data(data_list)
+
+        if request.form.get("action") == "check":
+            # inputs = [request.form[f"input{i}"] for i in range(1, 8)]
+            # tmp_input = preprocess_data(inputs)
+            current_index = int(request.form.get("current_index"))
+            # doc_to_edit = docs.where("index", "==", current_index).get()
+            # for doc in doc_to_edit:
+            #     doc.reference.update({"data": tmp_input})
+            index_initial = current_index
+            messages = check_data(data_list)
+            print("check")
+
+        messages = check_data(data_list)
 
         create_pdf(
             output_filename=f"./testapp/static/output/{project_name}.pdf",
@@ -193,4 +237,6 @@ def project_form(project_name):
             index_initial=index_initial,
             project_name=project_name,
             event_names=event_names,
+            data_list=data_list,
+            messages=messages,
         )
