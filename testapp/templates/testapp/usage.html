@@ -13,21 +13,55 @@
 <div class="custom-container mt-8">
     <div class="row">
         <div class="col-md-9">
-
+            <h1>サイトの使用方法</h1>
             ここではこのサイトの使用方法を説明します.<br>
             <strong>ステージ表を作成する方は最初に必ず確認してください.</strong><br>
             特に<strong>"注意事項"</strong>の部分は必ず確認してください.<br><br>
-            <h2 class="heading-22">注意事項</h2>
-            <div style="margin-left: 1em;">
-                <h5>このサイトを使用する際はパソコンを使用してください.推奨ブラウザはGoogle Chromeです.</h5>
-                <h5>また, 編集画面においてブラウザの前に戻る, 次に進むボタンは決して使用しないでください.</h5>
-                <h5>使用してしまった場合はすぐにページ上部"Project"ボタンから編集画面に入りなおしてください.</h5>
-                <h5>想定されない動作が引き起こされる可能性があります (致命的なエラーが生じることはないはずです...多分).</h5>
+            <h2 id="注意事項" class="heading-22">注意事項</h2>
+            <div style="margin-left: 2em;">
+                <h3 id="実行環境について" class="heading-1">実行環境について</h3>
+                このサイトの操作は<strong>必ずパソコンで</strong>行ってください. 推奨ブラウザは<strong>Google Chrome</strong>です.
+                <br><br>
+                <h3 id="プロジェクト管理について" class="heading-1">プロジェクト管理について</h3>
+                プロジェクト(ステージ表)は自動で削除されないため, <strong>必要がなくなったプロジェクトは適宜削除してください.</strong><br>
+                また, バックアップはとっていないので<strong>他人のプロジェクトを勝手に編集したり, 削除したりしないでください.</strong><br>
                 <br>
+                <h3 id="操作について" class="heading-1">操作について</h3>
+                <div style="margin-left: 2em;">
+                    <h4 class="heading-33">
+                        <span>ブラウザ</span>
+                    </h4>
+                    ブラウザの<strong>前に戻る, 次に進む, 再読み込みボタンは決して使用しないでください.</strong><br>
+                    使用してしまった場合は"Project"ボタンから編集画面に入りなおして再度操作を行ってください.<br>
+                    想定されない動作が引き起こされる可能性があります. 致命的なエラーが生じることはないはずですが保証はできません.<br>
+                    <strong>前の操作をやり直したい際は, 追加・編集・削除ボタンを使用して操作の訂正を行ってください.</strong><br>
+                    <br>
+                    <h4 class="heading-33">
+                        <span>入力ボックス</span>
+                    </h4>
+                    入力を記入する際には, 基本的に<strong>ボックスをはみ出さないようにしてください.</strong><br>
+                    ボックスをスクロールせずに入力内容が全て確認できるようであれば問題ありません.<br>
+                    また, <strong>入力を行う際には基本的に入力補助を使用してください. </strong><br><br>
+                    <h4 class="heading-33">
+                        <span>行番号</span>
+                    </h4>
+                    <strong>ステージ表の行番号は自動で割り振られる</strong>ため, 編集において進行名の欄に番号を記入する必要はありません.<br>
+                    <br>
+                    <h4 class="heading-33">
+                        <span>幕</span>
+                    </h4>
+                    舞台の状態を記述する際には行先頭の<strong>"引割3","引割1","緞帳"(数字は半角)という記述を変更しないようにしてください.</strong><br>
+                    入力補助, チェックが正しく実行されないようになります.<br>
+                    <p><strong>悪い例:</strong> <span style="color: red;">"引割3"</span>を<span
+                            style="color: red;">"引き割り3"</span>や<span style="color: red;">"引割３"(全角)</span>に変更する.</p>
+                    幕の種類を減らすことや, 位置関係の変更は可能です. 詳細は下記の<a href="#幕位置の変更"><strong>幕位置の変更</strong></a>の項目をご覧ください.<br>
+                    <br>
+
+                </div>
             </div>
-            <h2 class="heading-22">ステージ表の作成</h2>
-            <div style="margin-left: 1em;">
-                <h3 class="heading-1">プロジェクトの作成・削除</h3>
+            <h2 id="ステージ表の作成" class="heading-22">ステージ表の作成</h2>
+            <div style="margin-left: 2em;">
+                <h3 id="プロジェクトの作成・削除" class="heading-1">プロジェクトの作成・削除</h3>
                 <span>ステージ表を作成するにはまずページ上部の"Projects"(下図A)をクリックします.<br>
                     この画面ではプロジェクトの作成・削除を行うことができます.<br><br> </span>
                 <img src="{{ url_for('static', filename='images/project_big_new.png') }}"
@@ -47,7 +81,7 @@
                         </span>
                     </li>
                 </ul>
-                <h3 class="heading-1">プロジェクトの編集</h3>
+                <h3 id="プロジェクトの編集" class="heading-1">プロジェクトの編集</h3>
                 <span>編集画面ではステージ表の編集・ダウンロードなどを行うことができます.<br>
                     基本の編集画面は以下の通りですが, データが何も書き込まれていない状態 (プロジェクトを作成した直後など) においては少し異なります.<br>
                     <br> </span>
@@ -71,16 +105,13 @@
                         <span>ステージ表の情報を入力するためのテキストボックスです.<br>
                             テキストボックスの配置はステージ表の各行の配置に対応しています.<br>
                             ここでは編集もしくは追加したい行の情報を入力してください.<br>
-                            <strong>"舞台"の欄において"引割3","引割1","緞帳"という記述を変更しないようにしてください.</strong><br>
-                            <strong>入力補助, チェックが正しく実行されないようになります.</strong><br>
-                            <strong>また, 進行名の欄に番号を記入する必要はありません.</strong>
                         </span>
                     </li>
                     <li style="display: flex; align-items: flex-start;">
                         <strong style="margin-right: 0.5em;">入力補助&#9;</strong>
                         <span>入力補助ボタンを押すと, ②の入力ボックスを自動で入力することができます.<br>
                             <strong>記入時には基本的に入力補助を使用してください.</strong><br>
-                            詳細は下記の"入力補助"の項目をご覧ください.
+                            詳細は下記の<a href="#入力補助"><strong>入力補助</strong></a>の項目をご覧ください.
                         </span>
                     </li>
                     <li style="display: flex; align-items: flex-start;">
@@ -100,7 +131,7 @@
                     <li style="display: flex; align-items: flex-start;">
                         <strong style="margin-right: 0.5em;">高度な操作&#9;</strong>
                         <span>⑥の操作よりも更に複雑な操作を行うことができます.<br>
-                            詳細は下記の"高度な操作"の項目をご覧ください.
+                            詳細は下記の<a href="#高度な操作"><strong>高度な操作</strong></a>の項目をご覧ください.
                         </span>
                     </li>
                     <li style="display: flex; align-items: flex-start;">
@@ -118,43 +149,110 @@
                         </span>
                     </li>
                 </ul>
-                <h4 class="heading-33">
-                    <span>入力補助</span>
-                </h4>
-                <span>入力補助は入力ボックスの内容を自動で入力するための機能です.<br>
-                    <strong>入力時には基本的にこの機能を使用してください.</strong><br>
-                </span>
-                <img src="{{ url_for('static', filename='images/input_assist_new.png') }}"
-                    style="width: 80%; border: 0.05em solid black;">
-                <ul class="list-2">
-                    <li style="display: flex; align-items: flex-start;">
-                        <strong style="margin-right: 0.5em;">コピー &#9;&#9;</strong>
-                        <span>ステージ表の指定された行の内容を入力ボックスに入力します.<br>
-                        </span>
-                    </li>
-                    <li style="display: flex; align-items: flex-start;">
-                        <strong style="margin-right: 0.5em;">舞台&#9;</strong>
-                        <span>"舞台"のテキストボックスにおいて指定された幕を開閉できます.<br>
-                            <strong>幕の開閉は必ずこの機能を使用してください.</strong><br>
-                        </span>
-                    </li>
-                    <li style="display: flex; align-items: flex-start;">
-                        <strong style="margin-right: 0.5em;">クリア&#9;</strong>
-                        <span>指定されたテキストボックスの入力内容を消去します.<br>
-                            "舞台"のテキストボックスについては全ての幕が閉じられ,幕以外の入力が消去されます.
-                        </span>
-                    </li>
-
-                </ul>
-                <img src="{{ url_for('static', filename='images/sousa_new.png') }}"
-                    style="width: 50%; border: 0.05em solid black;">
+                <div style="margin-left: 2em;">
+                    <h4 id="入力補助" class="heading-33">
+                        <span>入力補助</span>
+                    </h4>
+                    <span>入力補助は入力ボックスの内容を自動で入力するための機能です.<br>
+                        <strong>入力時には基本的にこの機能を使用してください.</strong><br>
+                    </span>
+                    <img src="{{ url_for('static', filename='images/input_assist_new.png') }}"
+                        style="width: 80%; border: 0.05em solid black;">
+                    <ul class="list-2">
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">コピー &#9;&#9;</strong>
+                            <span>ステージ表の指定された行の内容を入力ボックスに入力します.<br>
+                            </span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">舞台&#9;</strong>
+                            <span>"舞台"のテキストボックスにおいて指定された幕を開閉できます.<br>
+                                <strong>幕の開閉は必ずこの機能を使用してください.</strong><br>
+                            </span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">クリア&#9;</strong>
+                            <span>指定されたテキストボックスの入力内容を消去します.<br>
+                                "舞台"のテキストボックスについては全ての幕が閉じられ,幕以外の入力が消去されます.
+                            </span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">照明&#9;</strong>
+                            <span>照明のテキストボックスへの入力を行います.<br>
+                                操作順序(番号)・照明の種類・操作を選択し, 入力ボタンを押してください.<br>
+                                操作順序(番号)を記入する必要がない場合は"-"を選択してください.<br>
+                                <strong>ホリに関して色の指定がある場合は改行して次の行に記入してください.</strong>
+                            </span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">音響&#9;</strong>
+                            <span>音響のテキストボックスへの入力を行います.<br>
+                                使用方法は④照明と同様です.<br>
+                            </span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">幕&#9;</strong>
+                            <span>幕のテキストボックスへの入力を行います.<br>
+                                使用方法は④照明と同様です.<br>
+                                "舞台"の入力内容は自動で変更されないため, 併せて②を使用して幕の開閉を行ってください.<br>
+                            </span>
+                        </li>
+                    </ul>
+                    <h4 id="高度な操作" class="heading-33">
+                        <span>高度な操作</span>
+                    </h4>
+                    <img src="{{ url_for('static', filename='images/sousa_new.png') }}"
+                        style="width: 50%; border: 0.05em solid black;">
+                    <ul class="list-2">
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">インポート &#9;&#9;</strong>
+                            <span>他のプロジェクト(ステージ表)を現在の行の後ろに追加します.<br>
+                                <strong>複数のステージ表をまとめて1つのステージ表にする際に便利です.</strong>
+                            </span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">グループ削除 &#9;&#9;</strong>
+                            <span>指定された行の範囲を削除します.
+                            </span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start;">
+                            <strong style="margin-right: 0.5em;">行の入れ替え &#9;&#9;</strong>
+                            <span>指定された2つ行を入れ替えます.
+                            </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <h4>編集画面</h4>
+            <h2 id="その他" class="heading-22">その他</h2>
+            <div style="margin-left: 2em;">
 
-            <h4>編集方法</h4>
-            <h5>入力補助</h5>
-            <h4>ステージ表を提出する人</h4>
-            <h4>ステージ表を作成する人</h4>
+                <h3 id="ステージ表の作成担当者へ" class="heading-1">ステージ表の作成担当者へ</h3>
+                複数の演者のステージ表を結合して1つのステージ表を作成する際にはインポート機能が便利です.<br>
+                具体的な手順としては以下の通りです.<br><br>
+                <ol>
+                    <li>演目ごとにプロジェクト(ステージ表)を作成する.</li>
+                    <li>1のプロジェクトを共有し, 演者に記入してもらう.</li>
+                    <li>結合用のプロジェクトを作成する.</li>
+                    <li>3のプロジェクトにおいて演目以外の内容(司会やフィナーレ)を記入する.</li>
+                    <li>インポート機能を使用し, 各演目の内容を追加する.</li>
+                    <li>演目間の幕操作などを調整する.</li>
+                    <li>ステージ表に矛盾がないのかチェックする.</li>
+                    <li>完成したステージ表をダウンロードする.</li>
+                    <li>使用しない1のプロジェクトを削除します.</li>
+                </ol>
+                <br>
+                <h3 id="幕位置の変更" class="heading-1">幕位置の変更</h3>
+                入力ボックスの"舞台"において, 幕の位置を変更したい場合は<strong>改行で</strong>位置をずらしてください. <br>
+                下図のように特定の幕を削除することも可能です. これにより入力補助・チェックの動作に影響が及ぼされることはありません.<br>
+
+                <div style="display: flex; justify-content: space-between;">
+                    <img src="{{ url_for('static', filename='images/maku_1.png') }}"
+                        style="width: 49%; border: 0.05em solid black;">
+                    <img src="{{ url_for('static', filename='images/maku_3.png') }}"
+                        style="width: 49%; border: 0.05em solid black;">
+                </div>
+                <br>
+            </div>
 
         </div>
         <div class="col-md-3">
@@ -165,12 +263,30 @@
                     目次
                 </div>
                 <ol>
-                    <li><a href="#">見出し1</a></li>
                     <li>
-                        <a href="#">見出し2</a>
+                        <a href="#注意事項">注意事項</a>
                         <ol>
-                            <li><a href="#">見出し2-1</a></li>
-                            <li><a href="#">見出し2-2</a></li>
+                            <li><a href="#実行環境について">実行環境について</a></li>
+                            <li><a href="#プロジェクト管理について">プロジェクト管理について</a></li>
+                            <li><a href="#操作について">操作について</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#ステージ表の作成">ステージ表の作成</a>
+                        <ol>
+                            <li><a href="#プロジェクトの作成・削除">プロジェクトの作成・削除</a></li>
+                            <li><a href="#プロジェクトの編集">プロジェクトの編集</a></li>
+                            <ol>
+                                <li><a href="#入力補助">入力補助</a></li>
+                                <li><a href="#高度な操作">高度な操作</a></li>
+                            </ol>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#その他">その他</a>
+                        <ol>
+                            <li><a href="#ステージ表の作成担当者へ">ステージ表の作成担当者へ</a></li>
+                            <li><a href="#幕位置の変更">幕位置の変更</a></li>
                         </ol>
                     </li>
                 </ol>

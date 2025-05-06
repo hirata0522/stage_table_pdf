@@ -369,7 +369,12 @@
                                 const value2 = document.getElementById(selectId2).value;
                                 const value3 = document.getElementById(selectId3).value;
                                 const textarea = document.getElementById(textareaId);
-                                textarea.value += `${value1}${value2} ${value3}\n`;
+                                if (value2 === "ホリ") {
+                                    textarea.value += `${value1}${value2} ${value3}\n(色の詳細を記入)\n`;
+                                } else {
+                                    textarea.value += `${value1}${value2} ${value3}\n`;
+                                }
+                                // textarea.value += `${value1}${value2} ${value3}\n`;
                             }
                         </script>
 
