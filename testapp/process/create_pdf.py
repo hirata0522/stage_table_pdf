@@ -19,8 +19,8 @@ def create_pdf(
     # 日本語フォントを登録（NotoSansJP の例）
     # GoogleフォントからNotoSansJPをダウンロードする必要があります
     # ダウンロードURL: https://fonts.google.com/noto/specimen/Noto+Sans+JP
-    font_path = "report/font/Noto_Sans_JP/static/NotoSansJP-Regular.ttf"
-    font_path_bold = "report/font/Noto_Sans_JP/static/NotoSansJP-Bold.ttf"
+    font_path = "testapp/font/Noto_Sans_JP/static/NotoSansJP-Regular.ttf"
+    font_path_bold = "testapp/font/Noto_Sans_JP/static/NotoSansJP-Bold.ttf"
 
     pdfmetrics.registerFont(TTFont("NotoSansJP", font_path))
     pdfmetrics.registerFont(TTFont("NotoSansJP-Bold", font_path_bold))
