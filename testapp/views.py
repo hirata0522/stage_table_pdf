@@ -22,7 +22,8 @@ from testapp.process.data import preprocess_data, process_data
 # firebase_admin.initialize_app(cred)
 
 
-secret_name = os.environ.get("FIRESTORE_KEY")
+secret_name = os.environ.get("FIRESTORE_KEY_NAME")
+print(f"FIRESTORE_KEY_NAME: {secret_name}")
 if not secret_name:
     raise EnvironmentError("FIRESTORE_KEY environment variable not set.")
 client = secretmanager.SecretManagerServiceClient()
