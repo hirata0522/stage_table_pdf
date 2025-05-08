@@ -5,6 +5,7 @@ from flask import redirect, render_template, request, url_for
 sys.path.append("./")
 
 
+import json
 import os
 
 import firebase_admin
@@ -31,7 +32,9 @@ resource_name = f"projects/{os.environ['GCP_PROJECT']}/secrets/{secret_name}/ver
 
 try:
     response = client.access_secret_version(request={"name": resource_name})
-    credentials_json = response.payload.data.decode("utf-8")
+    credentials_json_str = response.payload.data.decode("utf-8")
+    print(f"Retrieved credentials JSON string: {credentials_json_str}")  # デバッグ
+    credentials_json = json.loads(credentials_json_str)
     cred = credentials.Certificate(credentials_json)
     firebase_admin.initialize_app(cred)
     print("Firebase app initialized from Secret Manager.")
