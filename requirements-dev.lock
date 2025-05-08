@@ -51,6 +51,7 @@ google-api-core==2.24.1
     # via google-api-python-client
     # via google-cloud-core
     # via google-cloud-firestore
+    # via google-cloud-secret-manager
     # via google-cloud-storage
 google-api-python-client==2.162.0
     # via firebase-admin
@@ -60,6 +61,7 @@ google-auth==2.38.0
     # via google-auth-httplib2
     # via google-cloud-core
     # via google-cloud-firestore
+    # via google-cloud-secret-manager
     # via google-cloud-storage
 google-auth-httplib2==0.2.0
     # via google-api-python-client
@@ -68,6 +70,8 @@ google-cloud-core==2.4.2
     # via google-cloud-storage
 google-cloud-firestore==2.20.0
     # via firebase-admin
+    # via python-docker
+google-cloud-secret-manager==2.23.3
     # via python-docker
 google-cloud-storage==3.0.0
     # via firebase-admin
@@ -78,9 +82,14 @@ google-resumable-media==2.7.2
     # via google-cloud-storage
 googleapis-common-protos==1.68.0
     # via google-api-core
+    # via grpc-google-iam-v1
     # via grpcio-status
+grpc-google-iam-v1==0.14.2
+    # via google-cloud-secret-manager
 grpcio==1.70.0
     # via google-api-core
+    # via googleapis-common-protos
+    # via grpc-google-iam-v1
     # via grpcio-status
 grpcio-status==1.70.0
     # via google-api-core
@@ -139,10 +148,13 @@ prompt-toolkit==3.0.43
 proto-plus==1.26.0
     # via google-api-core
     # via google-cloud-firestore
+    # via google-cloud-secret-manager
 protobuf==5.29.3
     # via google-api-core
     # via google-cloud-firestore
+    # via google-cloud-secret-manager
     # via googleapis-common-protos
+    # via grpc-google-iam-v1
     # via grpcio-status
     # via proto-plus
 psutil==5.9.8
