@@ -5,6 +5,8 @@
     .custom-container {
         margin-left: 8%;
         margin-right: 8%;
+        font-size: 1vw;
+
     }
 </style>
 <div class="custom-container mt-4">
@@ -461,7 +463,7 @@
                                 <button
                                     style="font-size:1em; padding: 0.5em 0.5em; margin-top: 0.4em; display: inline; margin-left: 1em;"
                                     type="submit" name="action" value="exchange"
-                                    class="original-button_edit">入れ替え</button>
+                                    class="original-button_edit">入替</button>
                                 <strong>：</strong>
                                 <input style="display: inline; margin-left: 0.5em;" type="number" id="exchange_index_1"
                                     name="exchange_index_1" min="{{ index_min }}" max="{{ index_max }}" step="1"
@@ -470,7 +472,7 @@
                                 <input style="display: inline; margin-left: 0.5em;" type="number" id="exchange_index_2"
                                     name="exchange_index_2" min="{{ index_min }}" max="{{ index_max }}" step="1"
                                     value="{{ index_initial }}" oninput="validity.valid||(value='');">
-                                行目を入れ替える
+                                行目を入れ替え
                                 {% endif %}
                             </p>
 
