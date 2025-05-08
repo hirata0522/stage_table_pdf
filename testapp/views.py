@@ -9,16 +9,35 @@ import os
 
 import firebase_admin
 from firebase_admin import credentials, firestore
+from google.cloud import secretmanager
 
 from testapp import app
 from testapp.process.check import check_data
 from testapp.process.create_pdf import create_pdf
 from testapp.process.data import preprocess_data, process_data
 
-cred = credentials.Certificate(
-    "./testapp/firestore_key/stage-table-pdf-firebase-adminsdk-fbsvc-f9fcefc9db.json"
-)  # ダウンロードした秘密鍵
-firebase_admin.initialize_app(cred)
+# cred = credentials.Certificate(
+#     "./testapp/firestore_key/stage-table-pdf-firebase-adminsdk-fbsvc-f9fcefc9db.json"
+# )  # ダウンロードした秘密鍵
+# firebase_admin.initialize_app(cred)
+
+
+secret_name = os.environ.get("FIRESTORE_KEY")
+if not secret_name:
+    raise EnvironmentError("FIRESTORE_KEY environment variable not set.")
+client = secretmanager.SecretManagerServiceClient()
+resource_name = f"projects/{os.environ['GCP_PROJECT']}/secrets/{secret_name}/versions/latest"
+
+try:
+    response = client.access_secret_version(request={"name": resource_name})
+    credentials_json = response.payload.data.decode("utf-8")
+    cred = credentials.Certificate(credentials_json)
+    firebase_admin.initialize_app(cred)
+    print("Firebase app initialized from Secret Manager.")
+except Exception as e:
+    print(f"Error initializing Firebase app from Secret Manager: {e}")
+    raise
+
 
 db = firestore.client()
 print("Firestore initialized")

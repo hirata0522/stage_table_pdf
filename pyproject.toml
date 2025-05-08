@@ -9,6 +9,7 @@ dependencies = [
     "flask>=3.1.0",
     "firebase-admin>=6.6.0",
     "google-cloud-firestore>=2.20.0",
+    "google>=3.0.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"

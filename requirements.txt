@@ -12,6 +12,8 @@
 -e file:.
 asttokens==2.4.1
     # via stack-data
+beautifulsoup4==4.13.4
+    # via google
 blinker==1.9.0
     # via flask
 cachecontrol==0.14.2
@@ -41,6 +43,8 @@ executing==2.0.1
 firebase-admin==6.6.0
     # via python-docker
 flask==3.1.0
+    # via python-docker
+google==3.0.0
     # via python-docker
 google-api-core==2.24.1
     # via firebase-admin
@@ -168,6 +172,8 @@ rsa==4.9
 six==1.16.0
     # via asttokens
     # via python-dateutil
+soupsieve==2.7
+    # via beautifulsoup4
 stack-data==0.6.3
     # via ipython
 tornado==6.4
@@ -180,6 +186,8 @@ traitlets==5.14.2
     # via jupyter-client
     # via jupyter-core
     # via matplotlib-inline
+typing-extensions==4.13.2
+    # via beautifulsoup4
 uritemplate==4.1.1
     # via google-api-python-client
 urllib3==2.3.0
