@@ -17,12 +17,6 @@ from testapp.process.check import check_data
 from testapp.process.create_pdf import create_pdf
 from testapp.process.data import preprocess_data, process_data
 
-# cred = credentials.Certificate(
-#     "./testapp/firestore_key/stage-table-pdf-firebase-adminsdk-fbsvc-f9fcefc9db.json"
-# )  # ダウンロードした秘密鍵
-# firebase_admin.initialize_app(cred)
-
-
 secret_name = os.environ.get("FIRESTORE_KEY_NAME")
 print(f"FIRESTORE_KEY_NAME: {secret_name}")
 if not secret_name:
@@ -33,7 +27,7 @@ resource_name = f"projects/{os.environ['GCP_PROJECT']}/secrets/{secret_name}/ver
 try:
     response = client.access_secret_version(request={"name": resource_name})
     credentials_json_str = response.payload.data.decode("utf-8")
-    print(f"Retrieved credentials JSON string: {credentials_json_str}")  # デバッグ
+    # print(f"Retrieved credentials JSON string: {credentials_json_str}")  # デバッグ
     credentials_json = json.loads(credentials_json_str)
     cred = credentials.Certificate(credentials_json)
     firebase_admin.initialize_app(cred)
@@ -42,6 +36,10 @@ except Exception as e:
     print(f"Error initializing Firebase app from Secret Manager: {e}")
     raise
 
+# cred = credentials.Certificate(
+#     "./testapp/firestore_key/stage-table-pdf-firebase-adminsdk-fbsvc-f9fcefc9db.json"
+# )  # ダウンロードした秘密鍵
+# firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 print("Firestore initialized")
@@ -113,8 +111,8 @@ def project_form(project_name):
         create_pdf(
             output_filename=f"./testapp/static/output/{project_name}.pdf",
             data=data,
-            font_size=10,
-            col_widths=[70, 190, 115, 85, 85],
+            # font_size=10,
+            # col_widths=[70, 190, 115, 85, 85],
             row_heights=[110, 40],
             page_num_font_size=15,
         )
@@ -247,8 +245,8 @@ def project_form(project_name):
         create_pdf(
             output_filename=f"./testapp/static/output/{project_name}.pdf",
             data=data,
-            font_size=10,
-            col_widths=[70, 190, 115, 85, 85],
+            # font_size=10,
+            # col_widths=[70, 190, 115, 85, 85],
             row_heights=[110, 40],
             page_num_font_size=15,
         )

@@ -35,7 +35,7 @@ def preprocess_data(data):
         return "".join(new_text)
 
     data[0] = wrap_text(data[0], 12) if get_string_width(data[0]) > 12 else data[0]
-    data[2] = wrap_text(data[2], 20) if get_string_width(data[2]) > 20 else data[2]
+    # data[2] = wrap_text(data[2], 20) if get_string_width(data[2]) > 20 else data[2]
 
     return data
 

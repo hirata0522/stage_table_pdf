@@ -10,12 +10,13 @@ def create_pdf(
     output_filename,
     data,
     font_size=10,
-    col_widths=[70, 190, 115, 85, 85],
+    col_widths=[70, 190, 115, 105, 85],
     row_heights=[110, 40],
     header_height=20,
     page_num_font_size=15,
     leading=15,  # 行間を指定する引数を追加
 ):
+    col_widths = [width * (font_size / 10) for width in col_widths]
     # 日本語フォントを登録（NotoSansJP の例）
     # GoogleフォントからNotoSansJPをダウンロードする必要があります
     # ダウンロードURL: https://fonts.google.com/noto/specimen/Noto+Sans+JP
@@ -29,7 +30,7 @@ def create_pdf(
     doc = BaseDocTemplate(
         output_filename,
         pagesize=A4,
-        topMargin=8 * mm,  # 上余白を20mmに設定
+        topMargin=11 * mm,  # 上余白を20mmに設定
         bottomMargin=0 * mm,  # 下余白を20mmに設定
     )
 

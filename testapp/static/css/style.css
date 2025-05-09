@@ -40,7 +40,7 @@ textarea {
 
 .Textarea_a {
     padding: 0.625em;
-    width: 19.375em;
+    width: 20em;
     /* 310px / 16 */
     height: 14.375em;
     /* 230px / 16 */
@@ -49,7 +49,7 @@ textarea {
 
 .Textarea_b {
     padding: 0.625em;
-    width: 19.375em;
+    width: 20em;
     height: 5em;
     resize: none;
 }
@@ -89,7 +89,7 @@ textarea {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 6.875em 19.375em 10.3125em 8.125em 8.125em;
+    grid-template-columns: 6.875em 20em 10.3125em 8.125em 8.125em;
     grid-template-rows: 2.5em 14.375em 5em;
     gap: 0.625em;
 }
@@ -522,7 +522,7 @@ span {
     background-color: #2589d0;
     color: #fff;
     font-weight: 600;
-    font-size: x-large;
+    font-size: 1.4em;
 }
 
 .toc-002 div::before {
